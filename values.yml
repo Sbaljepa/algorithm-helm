@@ -1,0 +1,33 @@
+replicaCount: 1
+
+image:
+  repository: your-docker-repo/algorithmapi
+  pullPolicy: IfNotPresent
+  tag: latest
+
+imagePullSecrets:
+  - name: emob-kube-secret
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources: {}
+
+secrets:
+  vaultAddress: "http://vault.default:8200"
+  roleName: "getsecrets"
+  objects:
+    - objectName: "mqttpasword"
+      secretPath: "secret/data/mqtt/credentials"
+      secretKey: "mqttpasword"
+    - objectName: "dbpass"
+      secretPath: "secret/data/db/credentials"
+      secretKey: "dbpass"
+    - objectName: "algorithapi"
+      secretPath: "secret/data/keycloak/clients"
+      secretKey: "algorithapi"
+
+config:
+  test1: "1"
+  test2: "2"

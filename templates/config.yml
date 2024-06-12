@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: algorithmapi-config
+  labels:
+    app: algorithmapi-app
+data:
+  test1: {{ .Values.config.test1 }}
+  test2: {{ .Values.config.test2 }}
